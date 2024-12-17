@@ -28,7 +28,7 @@ export default function Home() {
                 rel="noopener noreferrer"
                 className="text-blue-500 hover:underline"
               >
-                View Blanco page
+                View {item.fields.rubrik} page
               </a>
             
               {item.fields.image && item.fields.image.fields && item.fields.image.fields.file && (
