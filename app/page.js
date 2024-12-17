@@ -17,11 +17,11 @@ export default function Home() {
   return (
     <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
       <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-2xl font-bold">Mitt startsida-innehåll</h1>
+        <h1 className="text-2xl font-bold">My Portfolio</h1>
         {content.map((item) => (
           <div key={item.sys.id} className="flex flex-col items-center">
-            <h2 className="text-xl">{item.fields.title}</h2>
-            <p>{item.fields.description}</p>
+            <h2 className="text-xl">{item.fields.Rubrik}</h2>
+            <p>{item.fields.presentationstext }</p>
             {item.fields.image && (
               <img
                 src={`https:${item.fields.image.fields.file.url}`}
