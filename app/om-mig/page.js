@@ -25,6 +25,16 @@ export default function Home() {
                  <p style={{ marginRight: "160px"}}>{item.fields.utbildningar }</p>
                  <p>{item.fields.arbetslivserfarenheter}</p>
             </div>
+            <div>
+            {item.fields.image && item.fields.image.fields && item.fields.image.fields.file && (
+                <img
+                  src={`https:${item.fields.image.fields.file.url}`}
+                  alt={item.fields.rubrik}
+                  width={300}
+                  height={200}
+                />
+            )}
+            </div>
           </div>
         ))}
       </main>
