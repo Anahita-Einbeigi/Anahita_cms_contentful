@@ -1,0 +1,167 @@
+body {
+  background-color: rgb(31, 31, 31);
+  color: white;
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100vh;
+  box-sizing: border-box;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  width: 100%;
+  padding: 2rem;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.imageContainer {
+  width: 100%;
+}
+
+.responsiveImage {
+  width: 100%;
+  max-width: 500px;
+  height: auto;
+  border-radius: 5px;
+  object-fit: cover;
+}
+
+.textContainer {
+  text-align: center;
+  width: 100%;
+}
+
+.heading {
+  font-size: 60px;
+  font-weight: bold;
+  margin-bottom: 40px;
+  position: relative;
+}
+
+.heading::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 60px;
+  width: 60%;
+  height: 1px;
+  background-color: white;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+.buttonGroup a:first-child {
+  background-color: white;
+  color: black;
+  border: none;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.buttonGroup a:first-child:hover {
+  background-color: #f0f0f0;
+}
+
+.buttonGroup a:last-child {
+  background-color: rgb(31, 31, 31);
+  color: white;
+  border: 1px solid white;
+  text-align: center;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.buttonGroup a:last-child:hover {
+  background-color: #444;
+}
+
+@media (min-width: 768px) {
+  .content {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: 2rem;
+  }
+
+  .imageContainer {
+    width: 50%;
+  }
+
+  .responsiveImage {
+    width: 100%;
+  }
+
+  .textContainer {
+    width: 50%;
+    text-align: left;
+  }
+
+  .buttonGroup {
+    justify-content: flex-start;
+  }
+}
+
+@media (max-width: 768px) {
+  .content {
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  .heading {
+    font-size: 30px;
+  }
+
+  .heading::after {
+    left: 140px;
+    width: 40%;
+  }
+  
+
+  .imageContainer {
+    width: 100%;
+  }
+
+  .responsiveImage {
+    width: 100%;
+  }
+
+  .textContainer {
+    width: 100%;
+    text-align: center;
+    margin-right: auto;
+    margin-left: auto;
+  }
+
+  .buttonGroup {
+    justify-content: center;
+    width: 100%;
+  }
+}

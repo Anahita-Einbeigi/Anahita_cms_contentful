@@ -1,7 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchContent } from "../lib/contentful"; 
-import "../src/styles/startsida.css"; 
+import styles from "../src/styles/startsida.module.css";
 
 export default function Home() {
   const [content, setContent] = useState([]); 
@@ -16,21 +16,33 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="container">
+    <div className={styles.container}>
       {content.map((item) => (
-        <div key={item.sys.id} className="content">
+        <div key={item.sys.id} className={styles.content}>
           {item.fields.image && (
-            <div className="image-container">
+            <div className={styles.imageContainer}>
               <img
                 src={`https:${item.fields.image.fields.file.url}`}
                 alt={item.fields.rubrik}
-                className="responsive-image"
+                className={styles.responsiveImage}
               />
             </div>
           )}
-          <div className="text-container">
-            <h1 className="heading">{item.fields.rubrik}</h1>
-            <p className="description">{item.fields.presentationstext}</p>
+          <div className={styles.textContainer}>
+            <h1 className={styles.heading}>{item.fields.rubrik}</h1>
+            <p className={styles.description}>{item.fields.presentationstext}</p>
+            <div className={styles.buttonGroup}>
+              {item.fields.link && (
+                <a href={item.fields.link} target="_blank" rel="noopener noreferrer">
+                  Explore Now
+                </a>
+              )}
+              {item.fields.linkedin && (
+                <a href={item.fields.linkedin} target="_blank" rel="noopener noreferrer">
+                  Linkedin
+                </a>
+              )}
+            </div>
           </div>
         </div>
       ))}
