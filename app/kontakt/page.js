@@ -1,7 +1,10 @@
-"use client";
+"use client"; 
+
 import { useEffect, useState } from "react";
-import { fetchContent } from "../../lib/contentful"; 
-import "../../src/styles/kontakt.css";
+import { fetchContent } from "../../lib/contentful";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPhone, faGlobe, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
+import styles from "../../src/styles/Kontakt.module.css";
 
 export default function Home() {
   const [content, setContent] = useState([]); 
@@ -16,35 +19,34 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
+    <div className={styles.kontaktWrapper}>
+      <main className={styles.mainContent}>
         {content.map((item) => (
-          <div key={item.sys.id} className="flex">
+          <div key={item.sys.id} className={styles.flexContainer}>
             {item.fields.image && item.fields.image.fields && item.fields.image.fields.file && (
               <img
                 src={`https:${item.fields.image.fields.file.url}`}
                 alt={item.fields.title}
-                className="responsive-image"
+                className={styles.responsiveImage}
               />
             )}
-            <div className="content">
-              <h1>{item.fields.rubrik}</h1>
-              <p>{item.fields.kontaktinfo}</p>
+            <div className={styles.content}>
+              <h1 className={styles.heading}>{item.fields.rubrik}</h1>
+              <p className={styles.paragraph}>{item.fields.kontaktinfo}</p>
 
               {item.fields.contacts && Array.isArray(item.fields.contacts) && item.fields.contacts.length > 0 && (
-                <ul>
+                <ul className={styles.ulList}>
                   {item.fields.contacts.map((contact, index) => (
-                    <div key={index}>
-                      <p><strong>Tell:</strong> {contact.fields.tell}</p>
-                      <p><strong>Website:</strong> {contact.fields.webbsite}</p>
-                      <p><strong>Mail:</strong> {contact.fields.mail}</p>
-                      <p><strong>Adress:</strong> {contact.fields.adress}</p>
-                    </div>
+                    <li key={index}>
+                      <p><FontAwesomeIcon icon={faPhone} /> <strong> Tell: </strong> {contact.fields.tell}</p>
+                      <p><FontAwesomeIcon icon={faGlobe} /> <strong> Website: </strong> {contact.fields.webbsite}</p>
+                      <p><FontAwesomeIcon icon={faEnvelope} /> <strong> Mail: </strong> {contact.fields.mail}</p>
+                      <p><FontAwesomeIcon icon={faMapMarkerAlt} /> <strong> Adress: </strong> {contact.fields.adress}</p>
+                    </li>
                   ))}
                 </ul>
               )}
             </div>
-
           </div>
         ))}
       </main>
