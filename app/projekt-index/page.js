@@ -27,31 +27,33 @@ export default function Home() {
     <div className={styles.projektWrapper}>
       <header className={styles.header}>
         <h1>{headerInfo.rubrik}</h1>
-        <p>{headerInfo.beskrivning}</p> 
+        <p>{headerInfo.beskrivning}</p>
       </header>
 
       <main className={styles.projektGrid}>
-        {content.map((item) =>
-          item.fields.projektreferenser.map((Projekt, index) => (
-            <div key={index} className={styles.projektCard}>
-              <img
-                src={`https:${Projekt.fields.img?.fields?.file?.url || ""}`}
-                alt={Projekt.fields.title || "Project image"}
-              />
-              <h2>{Projekt.fields.title}</h2>
-              <p>{Projekt.fields.text}</p>
-              {Projekt.fields.link && (
-                <a
-                  href={Projekt.fields.link}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  See more information
-                </a>
-              )}
-            </div>
-          ))
-        )}
+        {content &&
+          content.map((item) =>
+            item.fields.projektreferenser &&
+            item.fields.projektreferenser.map((Projekt, index) => (
+              <div key={index} className={styles.projektCard}>
+                <img
+                  src={`https:${Projekt.fields.img?.fields?.file?.url || ""}`}
+                  alt={Projekt.fields.title || "Project image"}
+                />
+                <h2>{Projekt.fields.title}</h2>
+                <p>{Projekt.fields.text}</p>
+                {Projekt.fields.link && (
+                  <a
+                    href={Projekt.fields.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    See more information
+                  </a>
+                )}
+              </div>
+            ))
+          )}
       </main>
     </div>
   );

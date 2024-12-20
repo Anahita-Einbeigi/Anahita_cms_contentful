@@ -12,6 +12,10 @@
   box-sizing: border-box;
 }
 
+h1:after {
+  display: none !important;
+}
+
 .header {
   text-align: center;
   margin-bottom: 2rem;
