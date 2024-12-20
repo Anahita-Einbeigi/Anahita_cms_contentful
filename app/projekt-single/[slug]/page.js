@@ -48,9 +48,9 @@ export default function ProjectSingle({ params }) {
           <>
             <h1 className={styles.title}>{project.fields.rubrik}</h1>
             <p className={styles.description}>{project.fields.beskrivning}</p>
-            {project.fields.image?.fields?.file?.url ? (
+            {project.fields.img?.fields?.file?.url ? (
               <img
-                src={`https:${project.fields.image.fields.file.url}`}
+                src={`https:${project.fields.img.fields.file.url}`}
                 alt={project.fields.rubrik}
                 className={styles.image}
               />
