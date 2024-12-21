@@ -57,6 +57,7 @@ export default function ProjectSingle({ params }) {
             ) : (
               <p>Ingen bild tillgänglig</p>
             )}
+            <p className={styles.description}>{project.fields.beskrivning2}</p>
           </>
         )}
       </main>

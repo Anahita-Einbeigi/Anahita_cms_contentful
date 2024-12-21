@@ -1,37 +1,44 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchContent } from "../../lib/contentful"; 
+import styles from "../../src/styles/404.module.css"; 
 
-export default function Home() {
-  const [content, setContent] = useState([]); 
+export default function NotFound() {
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-      const data = await fetchContent("felMeddelande");
-      setContent(data); 
+      try {
+        const data = await fetchContent("felMeddelande"); 
+        setContent(data); 
+      } catch (error) {
+        console.error("Fel vid hämtning av felmeddelande:", error); 
+      }
     };
 
-    fetchData();
+    fetchData(); 
   }, []);
 
   return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <h1 className="text-2xl font-bold">Error</h1>
-        {content.map((item) => (
-          <div key={item.sys.id} className="flex flex-col items-center">
-            <p>{item.fields.error }</p>
+    <div className={styles.container}>
+      <h1 className={styles.title}>404</h1>
+      {content.length > 0 ? (
+        content.map((item) => (
+          <div key={item.sys.id} className={styles.item}>
+            <p className={styles.description}>{item.fields.error}</p>
             <a
-                href={item.fields.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-500 hover:underline"
-              >
-                View Home page
-              </a>
+              href={item.fields.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className={styles.link}
+            >
+              {item.fields.linkText || "Back to the Home page"}
+            </a>
           </div>
-        ))}
-      </main>
+        ))
+      ) : (
+        <p className={styles.description}>We couldn't find any error message from Contentful.</p>
+      )}
     </div>
   );
 }
