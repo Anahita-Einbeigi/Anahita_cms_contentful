@@ -57,7 +57,27 @@ export default function ProjectSingle({ params }) {
             ) : (
               <p>Ingen bild tillgänglig</p>
             )}
+            {project.fields.url && (
+              <a
+                href={project.fields.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.backLink}
+              >
+                Back to Projects page
+              </a>
+            )}
             <p className={styles.description}>{project.fields.beskrivning2}</p>
+            <div className={styles.imageGallery}>
+                        {project.fields.images.map((image, index) => (
+                            <img
+                                key={index}
+                                src={image.fields.file.url}
+                                alt={`Image ${index + 1}`}
+                                className={styles.galleryImage}
+                            />
+                        ))}
+              </div>
           </>
         )}
       </main>
