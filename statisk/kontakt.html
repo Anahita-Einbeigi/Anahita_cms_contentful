@@ -1,28 +1,44 @@
- <!-- rubrik- presentationstext- bild -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
- </head>
- <body>
-   <header>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kontakt</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+  <div class="kontaktWrapper">
+    <header class="header">
       <nav>
-         <a href="startsida.html">Home</a>
-         <a href="om-mig.html">About</a>
-         <a href="projekt-index.html">Projects</a>
-         <a href="kontakt.html">Contact</a>
-       </nav>
+        <a href="startsida.html">Home</a>
+        <a href="om-mig.html">About</a>
+        <a href="projekt-index.html">Projects</a>
+        <a href="kontakt.html">Contact</a>
+      </nav>
     </header>
-    <main>
-      <section>
-        <h1>Contact me</h1>
-        <img src="images/contact.png" alt="contact">
-        <p>I am a passionate frontend developer with a strong background in creating responsive and engaging websites. If you’re looking for a professional to bring your web projects to life, feel free to reach out! Whether it’s a personal website, an e-commerce platform, or a portfolio, I can help you create a user-friendly experience tailored to your needs.</p>
-        <p>Contact Information • Phone Number: +46 760520000 • Email: anahita.einbeigi@gmail.com • Website: www.anahitaportfolio.com • Address: Storgatan 10, 111 22 Stockholm, Sweden
-        </p>
-      </section>
+    <main class="mainContent">
+      <div class="flexContainer">
+        <img src="images/contact.png" alt="Contact" class="responsiveImage contact">
+        <div class="content contact">
+          <h1 class="heading">Contact Me</h1>
+          <p class="paragraph">
+            I am a passionate frontend developer with a strong background in creating responsive and engaging websites. If you’re looking for a professional to bring your web projects to life, feel free to reach out! Whether it’s a personal website, an e-commerce platform, or a portfolio, I can help you create a user-friendly experience tailored to your needs.
+          </p>
+          <ul class="contactList">
+            <li class="contactItem">
+              <p><i class="fas fa-phone"></i> <strong>Tel:</strong> +46 760520000</p>
+              <p><i class="fas fa-globe"></i> <strong>Website:</strong> <a href="http://127.0.0.1:5500/statisk/startsida.html" target="_blank" rel="noopener noreferrer" style="color: aliceblue;">www.anahitaportfolio.com</a></p>
+              <p><i class="fas fa-envelope"></i> <strong>Email:</strong> anahita.einbeigi@gmail.com</p>
+              <p><i class="fas fa-map-marker-alt"></i> <strong>Address:</strong> Storgatan 10, 111 22 Stockholm, Sweden</p>
+            </li>
+          </ul>
+        </div>
+      </div>
     </main>
- </body>
- </html>
+  </div>
+  <footer>
+    <p>© 2025 Anahita's portfolio. All rights reserved.</p>
+  </footer>
+</body>
+</html>

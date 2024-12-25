@@ -1,28 +1,201 @@
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    line-height: 1.6;
-  }
-  
-  header {
-    background: #333;
-    color: white;
-    text-align: center;
-    padding: 10px 0;
-  }
-  
-  nav a {
-    color: white;
-    margin: 0 10px;
-    text-decoration: none;
-  }
-  
-  main {
-    padding: 20px;
-  }
-  
-  img {
-    max-width: 100%;
-    height: auto;
-  }
+body , html{
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  background-color: rgb(31, 31, 31);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+a {
+  text-decoration: none;
+  color: #242526;
+}
+
+header {
+  background-color: #333;
+  padding: 10px 0;
+  color: white;
+}
+
+nav {
+  display: flex;
+  justify-content: left;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  font-weight: bold;
+  padding: 10px 15px;
+}
+
+nav a:hover {
+  background-color: #555;
+  border-radius: 5px;
+}
+
+.content {
+  display: flex;
+  justify-content: space-between;
+  padding: 40px 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  gap: 20px;
+}
+
+.imageContainer {
+  flex: 1;
+  text-align: center;
+}
+
+.responsiveImage {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  border-radius: 8px;
+}
+
+.textContainer {
+  flex: 2;
+  padding: 20px;
+}
+
+.heading {
+  font-size: 3rem;
+  margin-bottom: 20px;
+  color: #edf4fc;
+}
+
+.description {
+  font-size: 1rem;
+  line-height: 1.5;
+  margin-bottom: 20px;
+  color: #e4dede;
+}
+
+.buttonGroup {
+  display: flex;
+  gap: 15px;
+}
+
+.buttonGroup a {
+  background-color: #edf4fc;
+  color: rgb(38, 36, 36);
+  padding: 10px 20px;
+  font-weight: bold;
+  text-align: center;
+  transition: background-color 0.3s;
+}
+
+.buttonGroup a:hover {
+  background-color: #222223;
+  color: #e4dede;
+  border: solid 1px white;
+}
+
+main {
+  flex: 1; 
+}
+
+footer {
+  background-color: #333;
+  color: white;
+  text-align: center;
+  padding: 10px 0;
+  margin-top: auto;
+  display: block;
+}
+
+footer p {
+  margin: 0;
+}
+
+/* om mig sidan */
+.container {
+  padding: 20px;
+  max-width: 1200px;
+  margin: auto;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-left {
+  flex: 2;
+}
+
+.image-container {
+  flex: 1;
+  text-align: center;
+}
+
+.image-container img {
+  max-width: 100%;
+  border-radius: 10px;
+  width: 40%;
+}
+
+h1 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  color: #e4dede;
+  font-size: 3rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+  color: #e4dede;
+}
+
+p {
+  line-height: 1.6;
+  margin-bottom: 10px;
+  color: #e4dede;
+}
+
+ul {
+  list-style-type: disc;
+  padding-left: 20px;
+  color: #e4dede;
+}
+
+li {
+  margin-bottom: 10px;
+}
+/* projekts */
+.projektCard{
+  background-color: #212121;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 1rem;
+  margin: 1rem 0;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.projektCard a{
+  color: orange;
+}
+
+/* contact */
+.flexContainer{
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  margin-bottom: 40px;
+}
+
+.content.contact{
+  display: flex;
+  flex-direction: column;
+}
+
+.responsiveImage.contact{
+  padding: 30px;
+}

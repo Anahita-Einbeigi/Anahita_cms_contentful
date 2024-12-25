@@ -1,32 +1,66 @@
- <!-- rubrik- presentationstext- bild -->
- <!DOCTYPE html>
- <html lang="en">
- <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>projects</title>
- </head>
- <body>
-   <header>
-      <nav>
-        <a href="startsida.html">Home</a>
-        <a href="om-mig.html">About</a>
-        <a href="projekt-index.html">Projects</a>
-        <a href="kontakt.html">Contact</a>
-      </nav>
-    </header>
-    <main>
-      <section>
-        <h1>My projects</h1>
-        <p>Welcome to my portfolio! Here you will find a collection of projects that showcase my skills and passion for frontend development. Each project is an opportunity for me to apply the technologies and techniques I have learned to solve real-world problems, enhance user experiences, and create visually appealing designs. Feel free to explore the projects below, where you’ll find more details and links to see the live implementations. These projects reflect my journey and growth as a developer, and I am excited to continue learning and building even more innovative solutions.</p>
-        <a href="projekt-single.html">View my Projects</a>
-        <div>
-            <img src="images/pro1.jpg" alt="Profile image">
-            <img src="images/pro2.jpg" alt="Profile image">
-            <img src="images/pro3.png" alt="Profile image">
-            <img src="images/pro4.png" alt="Profile image">
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <nav>
+      <a href="startsida.html">Home</a>
+      <a href="om-mig.html">About</a>
+      <a href="projekt-index.html">Projects</a>
+      <a href="kontakt.html">Contact</a>
+    </nav>
+  </header>
+  
+  <div class="projektWrapper">
+    <section class="header" >
+      <h1 style="text-align: center">My Projects</h1>
+      <p style="padding: 20px; align-self: center;;">Welcome to my portfolio! Here you will find a collection of projects that showcase my skills and passion for frontend development. Each project is an opportunity for me to apply the technologies and techniques I have learned to solve real-world problems, enhance user experiences, and create visually appealing designs. Feel free to explore the projects below, where you’ll find more details and links to see the live implementations. These projects reflect my journey and growth as a developer, and I am excited to continue learning and building even more innovative solutions.</p>
+
+      <div class="filterWrapper" style="text-align: center">
+        <label for="categoryFilter" style="color: aliceblue;">Filter by category:</label>
+        <select id="categoryFilter">
+          <option value="All">All</option>
+          <option value="cat1">Eco-friendly</option>
+          <option value="cat2">Fashion</option>
+          <option value="cat3">Photography</option>
+          <option value="cat4">Furniture</option>
+        </select>
+      </div>
+    </section>
+
+    <main class="projektGrid">
+      <div style="display: flex; flex-direction: row; gap: 2rem;">
+        <div class="projektCard">
+          <img src="images/sunglasses.jpg" alt="Project 1" style="width: 150px !important;"/>
+          <h2>EcoFrame</h2>
+          <p>This is a website that I developed for selling eyeglasses online. I used Vue.js as our development tool, which allowed me to streamline the process and work efficiently. During the project, I focused on implementing a responsive design, intuitive navigation, and features that enable users to search, filter, and purchase eyeglasses with ease.</p>
+          <a href="projekt-single.html" target="_blank" rel="noopener noreferrer">See more information</a>
         </div>
-      </section>
+
+        <div class="projektCard">
+          <img src="images/furniture.png" alt="Project 2" style="width: 150px !important;"/>
+          <h2>Furniture</h2>
+          <p>Modern Furniture Hub is a responsive e-commerce website where you can discover a wide range of beautiful and functional furniture pieces for every room in your home. From timeless designs to modern essentials, the platform allows users to browse, explore, and purchase high-quality furniture effortlessly. The website is designed to provide a seamless experience on all devices, ensuring that users can find the perfect pieces to enhance their living spaces with style and comfort.</p>
+          <a href="projekt-single.html" target="_blank" rel="noopener noreferrer">See more information</a>
+        </div>
+
+        <div class="projektCard">
+          <img src="images/pro1.jpg" alt="Project 3" style="width: 150px !important;"/>
+          <h2>Photography</h2>
+          <p>This photography portfolio website highlights captivating visual stories through stunning imagery. Users can explore different photo collections, learn about the photographer’s services, and seamlessly navigate through detailed project showcases. Designed with a modern and responsive layout, the website allows clients to engage with the photographer through contact buttons, service details, and background information, making it easy to start a collaboration.</p>
+          <a href="projekt-single.html" target="_blank" rel="noopener noreferrer">See more information</a>
+        </div>
+      </div>
     </main>
- </body>
- </html>
+  </div>
+
+  <footer>
+    <p>© 2025 Anahita's portfolio. All rights reserved.</p>
+  </footer>
+</body>
+</html>
