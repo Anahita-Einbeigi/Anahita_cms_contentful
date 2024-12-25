@@ -13,7 +13,6 @@ export default function Home() {
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchContent("projektindex");
-      console.log("Fetched data:", data);
       setContent(data);
 
       if (data.length > 0) {
@@ -22,17 +21,22 @@ export default function Home() {
           beskrivning: data[0].fields.beskrivning || "Default Description",
         });
 
-        const allCategories = data
-          .flatMap((item) =>
-            item.fields.projektreferenser?.map((Projekt) => {
-              console.log("Projekt category:", Projekt?.fields?.category);
-              return Projekt?.fields?.category?.fields?.name || null;
-            })
-          )
-          .filter((value, index, self) => value && self.indexOf(value) === index);
-        
-        console.log("All Categories:", allCategories); 
-        setCategories(["All", ...allCategories]); 
+        const categoryData = await fetchContent("category");
+
+        setCategories([
+          { name: "All", slug: "All", sysId: "All" },
+          ...categoryData
+            .filter(Boolean)
+            .map((cat) => ({
+              name: cat.fields.name,
+              slug: cat.fields.slug,
+              sysId: cat.sys.id,
+            }))
+            .filter(
+              (value, index, self) =>
+                self.findIndex((item) => item.sysId === value.sysId) === index
+            ),
+        ]);
       }
 
       setFilteredProjects(data);
@@ -43,16 +47,17 @@ export default function Home() {
 
   useEffect(() => {
     if (selectedCategory === "All") {
-      setFilteredProjects(content); 
+      setFilteredProjects(content);
     } else {
       const filtered = content.map((item) => ({
         ...item,
         fields: {
           ...item.fields,
-          projektreferenser: item.fields.projektreferenser?.filter(
-            (Projekt) =>
-              Projekt.fields.category?.fields.name === selectedCategory
-          ),
+          projektreferenser: item.fields.projektreferenser?.filter((projekt) => {
+            return projekt.fields?.category?.some(
+              (cat) => cat.sys.id === selectedCategory
+            );
+          }),
         },
       }));
 
@@ -77,8 +82,8 @@ export default function Home() {
           >
             {categories.length > 0 ? (
               categories.map((category, index) => (
-                <option key={index} value={category}>
-                  {category}
+                <option key={index} value={category.sysId}>
+                  {category.name}
                 </option>
               ))
             ) : (
@@ -89,20 +94,19 @@ export default function Home() {
       </header>
 
       <main className={styles.projektGrid}>
-        {filteredProjects &&
+        {filteredProjects && filteredProjects.length > 0 ? (
           filteredProjects.map((item) =>
-            item.fields.projektreferenser &&
-            item.fields.projektreferenser.map((Projekt, index) => (
+            item.fields.projektreferenser.map((projekt, index) => (
               <div key={index} className={styles.projektCard}>
                 <img
-                  src={`https:${Projekt.fields.img?.fields?.file?.url || ""}`}
-                  alt={Projekt.fields.title || "Project image"}
+                  src={`https:${projekt.fields.img?.fields?.file?.url || ""}`}
+                  alt={projekt.fields.title || "Project image"}
                 />
-                <h2>{Projekt.fields.title}</h2>
-                <p>{Projekt.fields.text}</p>
-                {Projekt.fields.link && (
+                <h2>{projekt.fields.title}</h2>
+                <p>{projekt.fields.text}</p>
+                {projekt.fields.link && (
                   <a
-                    href={Projekt.fields.link}
+                    href={projekt.fields.link}
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -111,7 +115,10 @@ export default function Home() {
                 )}
               </div>
             ))
-          )}
+          )
+        ) : (
+          <p>No projects found for this category</p>
+        )}
       </main>
     </div>
   );
