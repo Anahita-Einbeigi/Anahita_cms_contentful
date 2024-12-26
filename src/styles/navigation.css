@@ -51,12 +51,13 @@ body {
       flex-direction: column;
       gap: 1rem;
       position: absolute;
-      top: 100%;
+      top: 66px;
       left: 0;
       width: 100%;
       background-color: black;
       padding: 1rem 0;
       border-top: 1px solid white;
+      z-index: 1000;
     }
   
     .menu.open {
