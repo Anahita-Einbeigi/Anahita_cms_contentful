@@ -1,6 +1,7 @@
 "use client";
 import { useEffect, useState } from "react";
 import { fetchContent } from "../../lib/contentful"; 
+import Image from "next/image"; 
 import "../../src/styles/aboutMe.css";
 
 export default function Home() {
@@ -44,8 +45,6 @@ export default function Home() {
                   </ul>
                 </div>
               )}
-
-              
             </div>
           </div>
 
@@ -53,10 +52,13 @@ export default function Home() {
             {item.fields.image &&
               item.fields.image.fields &&
               item.fields.image.fields.file && (
-                <img
+                <Image
                   src={`https:${item.fields.image.fields.file.url}`}
-                  alt={item.fields.rubrik}
-                  className=" h-auto object-cover rounded-lg"
+                  alt={item.fields.rubrik|| "om mig bild "} 
+                  className="h-auto object-cover rounded-lg"
+                  width={350}  
+                  height={500}
+                  priority={true}
                 />
               )}
           </div>

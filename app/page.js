@@ -1,15 +1,16 @@
 "use client";
 import { useEffect, useState } from "react";
-import { fetchContent } from "../lib/contentful"; 
+import Image from "next/image"; 
+import { fetchContent } from "../lib/contentful";
 import styles from "../src/styles/startsida.module.css";
 
 export default function Home() {
-  const [content, setContent] = useState([]); 
+  const [content, setContent] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
       const data = await fetchContent("startsida");
-      setContent(data); 
+      setContent(data);
     };
 
     fetchData();
@@ -19,12 +20,15 @@ export default function Home() {
     <div className={styles.container}>
       {content.map((item) => (
         <div key={item.sys.id} className={styles.content}>
-          {item.fields.image && (
+          {item.fields.image && item.fields.image.fields.file && (
             <div className={styles.imageContainer}>
-              <img
+              <Image
                 src={`https:${item.fields.image.fields.file.url}`}
-                alt={item.fields.rubrik}
+                alt={item.fields.rubrik} 
+                width={800} 
+                height={500} 
                 className={styles.responsiveImage}
+                priority
               />
             </div>
           )}
