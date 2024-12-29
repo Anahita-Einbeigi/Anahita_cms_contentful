@@ -100,7 +100,7 @@ export default function Home() {
               <div key={index} className={styles.projektCard}>
                 <img
                   src={`https:${projekt.fields.img?.fields?.file?.url || ""}`}
-                  alt={projekt.fields.title || "Project image"}
+                  alt={projekt.fields.title || "Project images"}
                 />
                 <h2>{projekt.fields.title}</h2>
                 <p>{projekt.fields.text}</p>

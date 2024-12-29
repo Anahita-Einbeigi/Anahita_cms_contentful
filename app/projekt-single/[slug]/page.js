@@ -1,84 +1,64 @@
-"use client";
-import { useEffect, useState } from "react";
 import { fetchContent } from "../../../lib/contentful";
 import styles from "../../../src/styles/projekt-single.module.css";
+import Image from "next/image";
 
-export default function ProjectSingle({ params }) {
-  const [project, setProject] = useState(null); 
-  const [loading, setLoading] = useState(true); 
-  const [error, setError] = useState(null); 
+export default async function ProjectSinglePage({ params }) {
+  const { slug } = await params;
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const resolvedParams = await params;
-        const slug = resolvedParams.slug; 
+  const projects = await fetchContent("projektSingle");
+  const matchedProject = projects.find(
+    (item) => item.fields.slug === slug
+  );
 
-        const data = await fetchContent("projektSingle");
-        const matchedProject = data.find((item) => item.fields.slug === slug);
-
-        if (matchedProject) {
-          setProject(matchedProject);
-        } else {
-          setError("Projektet hittades inte.");
-        }
-      } catch (err) {
-        console.error("Fel vid hämtning av data:", err);
-        setError("Ett fel uppstod vid hämtning av projektet.");
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchData();
-  }, [params]);
-
-  if (loading) {
-    return <div>Laddar...</div>;
-  }
-
-  if (error) {
-    return <div>{error}</div>;
+  if (!matchedProject) {
+    return <div className={styles.error}>The project was not found.</div>;
   }
 
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        {project && (
-          <>
-            <h1 className={styles.title}>{project.fields.rubrik}</h1>
-            <p className={styles.description}>{project.fields.beskrivning}</p>
-            {project.fields.img?.fields?.file?.url ? (
-              <img
-                src={`https:${project.fields.img.fields.file.url}`}
-                alt={project.fields.rubrik}
-                className={styles.image}
+        <h1 className={styles.title}>{matchedProject.fields.rubrik}</h1>
+        <p className={styles.description}>{matchedProject.fields.beskrivning}</p>
+        
+        {matchedProject.fields.img?.fields?.file?.url ? (
+          <Image
+            src={`https:${matchedProject.fields.img.fields.file.url}`}
+            alt={matchedProject.fields.rubrik}
+            width={800} 
+            height={600}
+            className={styles.image}
+            priority 
+          />
+        ) : (
+          <p>No image available</p>
+        )}
+
+        {matchedProject.fields.url && (
+          <a
+            href={matchedProject.fields.url}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={styles.backLink}
+          >
+            Visit the project page
+          </a>
+        )}
+
+        <p className={styles.description}>{matchedProject.fields.beskrivning2}</p>
+
+        {matchedProject.fields.images && (
+          <div className={styles.imageGallery}>
+            {matchedProject.fields.images.map((image, index) => (
+              <Image
+                key={index}
+                src={`https:${image.fields.file.url}`}
+                alt={`Image ${index + 1}`}
+                width={400} 
+                height={300}
+                className={styles.galleryImage}
               />
-            ) : (
-              <p>Ingen bild tillgänglig</p>
-            )}
-            {project.fields.url && (
-              <a
-                href={project.fields.url}
-                target="_blank"
-                rel="noopener noreferrer"
-                className={styles.backLink}
-              >
-                Back to Projects page
-              </a>
-            )}
-            <p className={styles.description}>{project.fields.beskrivning2}</p>
-            <div className={styles.imageGallery}>
-                        {project.fields.images.map((image, index) => (
-                            <img
-                                key={index}
-                                src={image.fields.file.url}
-                                alt={`Image ${index + 1}`}
-                                className={styles.galleryImage}
-                            />
-                        ))}
-              </div>
-          </>
+            ))}
+          </div>
         )}
       </main>
     </div>
