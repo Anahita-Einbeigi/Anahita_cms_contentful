@@ -1,49 +1,11 @@
-"use client";
 import { useEffect, useState } from "react";
-import { fetchContent } from "../../lib/contentful";
-import styles from "../../src/styles/Projekt.module.css";
+import { fetchContent } from "../lib/contentful";
+import Image from "next/image";
+import styles from "./src/styles/Projekt.module.css";
 
-export default function Home() {
-  const [content, setContent] = useState([]);
-  const [headerInfo, setHeaderInfo] = useState({ rubrik: "", beskrivning: "" });
-  const [categories, setCategories] = useState([]);
-  const [filteredProjects, setFilteredProjects] = useState([]);
+export default function Home({ content, categories, headerInfo }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchContent("projektindex");
-      setContent(data);
-
-      if (data.length > 0) {
-        setHeaderInfo({
-          rubrik: data[0].fields.rubrik || "Default Title",
-          beskrivning: data[0].fields.beskrivning || "Default Description",
-        });
-
-        const categoryData = await fetchContent("category");
-
-        setCategories([
-          { name: "All", slug: "All", sysId: "All" },
-          ...categoryData
-            .filter(Boolean)
-            .map((cat) => ({
-              name: cat.fields.name,
-              slug: cat.fields.slug,
-              sysId: cat.sys.id,
-            }))
-            .filter(
-              (value, index, self) =>
-                self.findIndex((item) => item.sysId === value.sysId) === index
-            ),
-        ]);
-      }
-
-      setFilteredProjects(data);
-    };
-
-    fetchData();
-  }, []);
+  const [filteredProjects, setFilteredProjects] = useState(content);
 
   useEffect(() => {
     if (selectedCategory === "All") {
@@ -98,9 +60,12 @@ export default function Home() {
           filteredProjects.map((item) =>
             item.fields.projektreferenser.map((projekt, index) => (
               <div key={index} className={styles.projektCard}>
-                <img
+                <Image
                   src={`https:${projekt.fields.img?.fields?.file?.url || ""}`}
                   alt={projekt.fields.title || "Project images"}
+                  width={500}  
+                  height={300} 
+                  style={{ objectFit: 'contain' }}
                 />
                 <h2>{projekt.fields.title}</h2>
                 <p>{projekt.fields.text}</p>
@@ -122,4 +87,48 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps() {
+  try {
+    const content = await fetchContent("projektindex");
+    const categoryData = await fetchContent("category");
+
+    const headerInfo = {
+      rubrik: content.length > 0 ? content[0].fields.rubrik : "Default Title",
+      beskrivning: content.length > 0 ? content[0].fields.beskrivning : "Default Description",
+    };
+
+    const categories = [
+      { name: "All", slug: "All", sysId: "All" },
+      ...categoryData
+        .filter(Boolean)
+        .map((cat) => ({
+          name: cat.fields.name,
+          slug: cat.fields.slug,
+          sysId: cat.sys.id,
+        }))
+        .filter(
+          (value, index, self) =>
+            self.findIndex((item) => item.sysId === value.sysId) === index
+        ),
+    ];
+
+    return {
+      props: {
+        content: content || [],
+        categories: categories || [],
+        headerInfo: headerInfo,
+      },
+    };
+  } catch (error) {
+    console.error("Error fetching content for SSR:", error);
+    return {
+      props: {
+        content: [],
+        categories: [],
+        headerInfo: { rubrik: "Error", beskrivning: "Could not load data" },
+      },
+    };
+  }
 }

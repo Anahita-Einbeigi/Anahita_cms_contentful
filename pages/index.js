@@ -1,21 +1,8 @@
-"use client";
-import { useEffect, useState } from "react";
 import Image from "next/image"; 
 import { fetchContent } from "../lib/contentful";
-import styles from "../src/styles/startsida.module.css";
+import styles from "./src/styles/startsida.module.css";
 
-export default function Home() {
-  const [content, setContent] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchContent("startsida");
-      setContent(data);
-    };
-
-    fetchData();
-  }, []);
-
+export default function Home({ content }) {
   return (
     <div className={styles.container}>
       {content.map((item) => (
@@ -52,4 +39,13 @@ export default function Home() {
       ))}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  const data = await fetchContent("startsida");
+  return {
+    props: {
+      content: data,
+    },
+  };
 }

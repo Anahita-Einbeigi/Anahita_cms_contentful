@@ -1,15 +1,8 @@
-import { fetchContent } from "../../../lib/contentful";
-import styles from "../../../src/styles/projekt-single.module.css";
+import { fetchContent } from "../../lib/contentful";
+import styles from "../src/styles/projekt-single.module.css";
 import Image from "next/image";
 
-export default async function ProjectSinglePage({ params }) {
-  const { slug } = await params;
-
-  const projects = await fetchContent("projektSingle");
-  const matchedProject = projects.find(
-    (item) => item.fields.slug === slug
-  );
-
+export default function ProjectSinglePage({ matchedProject }) {
   if (!matchedProject) {
     return <div className={styles.error}>The project was not found.</div>;
   }
@@ -63,4 +56,19 @@ export default async function ProjectSinglePage({ params }) {
       </main>
     </div>
   );
+}
+
+export async function getServerSideProps(context) {
+  const { slug } = context.params;
+
+  const projects = await fetchContent("projektSingle");
+  const matchedProject = projects.find(
+    (item) => item.fields.slug === slug
+  );
+
+  return {
+    props: {
+      matchedProject: matchedProject || null,
+    },
+  };
 }

@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { getNavigationItems } from '../lib/navigation';
-import '../src/styles/navigation.css';
+import '../pages/src/styles/navigation.css';
 
 export default function Navigation() {
   const [navItems, setNavItems] = useState([]);

@@ -1,39 +1,28 @@
-"use client"; 
-
-import { useEffect, useState } from "react";
-import { fetchContent } from "../../lib/contentful";
+import { fetchContent } from "../lib/contentful";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faPhone, faGlobe, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-solid-svg-icons';
-import styles from "../../src/styles/Kontakt.module.css";
+import Image from "next/image";
+import styles from "./src/styles/Kontakt.module.css";
 
-export default function Home() {
-  const [content, setContent] = useState([]); 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const data = await fetchContent("kontakt");
-      setContent(data); 
-    };
-
-    fetchData();
-  }, []);
-
+export default function Home({ content }) {
   return (
     <div className={styles.kontaktWrapper}>
       <main className={styles.mainContent}>
         {content.map((item) => (
           <div key={item.sys.id} className={styles.flexContainer}>
             {item.fields.image && item.fields.image.fields && item.fields.image.fields.file && (
-              <img
+              <Image
                 src={`https:${item.fields.image.fields.file.url}`}
-                alt={item.fields.title}
+                alt={item.fields.title || "Kontaktbild"} 
                 className={styles.responsiveImage}
+                width={400}
+                height={300}
+                priority={true}
               />
             )}
             <div className={styles.content}>
               <h1 className={styles.heading}>{item.fields.rubrik}</h1>
               <p className={styles.paragraph}>{item.fields.kontaktinfo}</p>
-
               {item.fields.contacts && Array.isArray(item.fields.contacts) && item.fields.contacts.length > 0 && (
                 <ul className={styles.ulList}>
                   {item.fields.contacts.map((contact, index) => (
@@ -52,4 +41,22 @@ export default function Home() {
       </main>
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const data = await fetchContent("kontakt");
+    return {
+      props: {
+        content: data || [], 
+      },
+      revalidate: 10, 
+    };
+  } catch (error) {
+    return {
+      props: {
+        content: [],
+      },
+    };
+  }
 }

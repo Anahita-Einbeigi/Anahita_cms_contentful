@@ -1,24 +1,7 @@
-"use client";
-import { useEffect, useState } from "react";
-import { fetchContent } from "../../lib/contentful"; 
-import styles from "../../src/styles/404.module.css"; 
+import { fetchContent } from "../lib/contentful";
+import styles from "./src/styles/404.module.css";
 
-export default function NotFound() {
-  const [content, setContent] = useState([]);
-
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const data = await fetchContent("felMeddelande"); 
-        setContent(data); 
-      } catch (error) {
-        console.error("Fel vid hämtning av felmeddelande:", error); 
-      }
-    };
-
-    fetchData(); 
-  }, []);
-
+export default function NotFound({ content }) {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>404</h1>
@@ -41,4 +24,23 @@ export default function NotFound() {
       )}
     </div>
   );
+}
+
+export async function getStaticProps() {
+  try {
+    const data = await fetchContent("felMeddelande");
+    return {
+      props: {
+        content: data || [],
+      },
+      revalidate: 10,
+    };
+  } catch (error) {
+    console.error("Error fetching error message:", error);
+    return {
+      props: {
+        content: [],
+      },
+    };
+  }
 }
