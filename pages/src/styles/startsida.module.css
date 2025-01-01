@@ -1,4 +1,4 @@
-body ,html{
+:global(body),:global(html){
   background-color: rgb(31, 31, 31);
   color: white;
   margin: 0;
