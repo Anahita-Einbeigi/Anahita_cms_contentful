@@ -34,7 +34,7 @@ export default function Home({ content, categories, headerInfo }) {
   return (
     <div className={styles.projektWrapper}>
       <header className={styles.header}>
-        <h1>{headerInfo.rubrik}</h1>
+        <h1 className={styles.statuspunkt}>{headerInfo.rubrik}</h1>
         <p>{headerInfo.beskrivning}</p>
 
         <div className={styles.filterWrapper}>

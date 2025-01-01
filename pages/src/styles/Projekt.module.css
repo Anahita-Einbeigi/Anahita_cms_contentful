@@ -12,7 +12,7 @@
   box-sizing: border-box;
 }
 
-h1:after {
+.statuspunkt::after {
   display: none !important;
 }
 
