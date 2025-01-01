@@ -3,6 +3,7 @@ import { fetchContent } from "../lib/contentful";
 import Image from "next/image";
 import styles from "./src/styles/Projekt.module.css";
 
+// Komponent "Home" renderar projektinnehåll dynamiskt baserat på valda kategorier.
 export default function Home({ content, categories, headerInfo }) {
   const [selectedCategory, setSelectedCategory] = useState("All");
   const [filteredProjects, setFilteredProjects] = useState(content);
@@ -89,6 +90,7 @@ export default function Home({ content, categories, headerInfo }) {
   );
 }
 
+// getServerSideProps hämtar data från Contentful varje gång sidan laddas på servern(SSR), vilket säkerställer att projekt och kategorier är aktuella.
 export async function getServerSideProps() {
   try {
     const content = await fetchContent("projektindex");

@@ -4,6 +4,7 @@ import { faPhone, faGlobe, faEnvelope, faMapMarkerAlt } from '@fortawesome/free-
 import Image from "next/image";
 import styles from "./src/styles/Kontakt.module.css";
 
+//"Home" renderar innehållet som hämtas från Contentful.
 export default function Home({ content }) {
   return (
     <div className={styles.kontaktWrapper}>
@@ -43,6 +44,7 @@ export default function Home({ content }) {
   );
 }
 
+// getStaticProps hämtar data från Contentful vid byggtid och levererar det som props till komponenten "Home".
 export async function getStaticProps() {
   try {
     const data = await fetchContent("kontakt");

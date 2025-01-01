@@ -3,15 +3,14 @@ import Image from "next/image";
 import Head from "next/head";
 import "./src/styles/aboutMe.css";
 
+// Huvudkomponenten "Home" renderar en personlig "About Me"-sida som visar utbildningar, arbetslivserfarenheter och en bild, med data hämtad från Contentful.
 export default function Home({ content }) {
   return (
     <div className="container">
       <Head>
         <title>About Me</title>
+        <meta name="description" content="Learn more about me, my education, and work experience." />
       </Head>
-      <header>
-        <div className="w-16 border-b-4 border-white"></div>
-      </header>
 
       {content.map((item) => (
         <main key={item.sys.id} className="flex-container">
@@ -93,6 +92,7 @@ export default function Home({ content }) {
   );
 }
 
+// getServerSideProps hämtar data från Contentful på serversidan vid varje sidladdning, vilket möjliggör dynamisk rendering baserat på aktuell data.
 export async function getServerSideProps() {
   try {
     const data = await fetchContent("omMig");

@@ -5,6 +5,7 @@ import { fetchContent } from "../lib/contentful";
 const Footer = () => {
   const [footerText, setFooterText] = useState("");
 
+  // Footer-komponenten använder en useEffect-hook för att hämta innehållet från Contentful dynamiskt vid klientens sidladdning.
   useEffect(() => {
     const fetchFooterContent = async () => {
       try {

@@ -2,6 +2,7 @@ import Image from "next/image";
 import { fetchContent } from "../lib/contentful";
 import styles from "./src/styles/startsida.module.css";
 
+//"Home" renderar innehållet som hämtas från Contentful.
 export default function Home({ content }) {
   return (
     <div className={styles.container}>
@@ -41,6 +42,7 @@ export default function Home({ content }) {
   );
 }
 
+// getStaticProps hämtar data från Contentful vid byggtid och levererar det som props till komponenten "Home", vilket möjliggör statisk generering av sidan.
 export async function getStaticProps() {
   const data = await fetchContent("startsida");
   return {

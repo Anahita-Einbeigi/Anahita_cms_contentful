@@ -26,6 +26,7 @@ export default function NotFound({ content }) {
   );
 }
 
+// hämta data statict(SSG)
 export async function getStaticProps() {
   try {
     const data = await fetchContent("felMeddelande");

@@ -32,6 +32,7 @@ export default function Navigation() {
     }
   };
 
+  // Adds and removes event listeners dynamically when the menu is open or closed.
   useEffect(() => {
     if (isMenuOpen) {
       document.addEventListener('click', handleClickOutside);
@@ -60,4 +61,14 @@ export default function Navigation() {
       </ul>
     </nav>
   );
+}
+
+// Static Site Generation (SSG): Hämta navigeringsdata vid byggtiden och skicka det som props till komponenten.
+export async function getStaticProps() {
+  const navItems = await getNavigationItems();
+  return {
+    props: {
+      navItems: navItems || [], // Returnera en tom array om inget hittas
+    },
+  };
 }
