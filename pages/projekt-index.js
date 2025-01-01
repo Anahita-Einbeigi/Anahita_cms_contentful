@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchContent } from "../lib/contentful";
 import Image from "next/image";
 import styles from "./src/styles/Projekt.module.css";
+import "./src/styles/global.css";
 
 // Komponent "Home" renderar projektinnehåll dynamiskt baserat på valda kategorier.
 export default function Home({ content, categories, headerInfo }) {

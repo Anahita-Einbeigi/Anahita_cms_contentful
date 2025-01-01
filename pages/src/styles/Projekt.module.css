@@ -1,11 +1,11 @@
-:global(body) {
+/* :global(body) {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   background-color: rgb(31, 31, 31);
   color: white;
   overflow-x: hidden;
-}
+} */
 
 .projektWrapper {
   padding: 2rem 1rem;

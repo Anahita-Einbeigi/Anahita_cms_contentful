@@ -1,6 +1,7 @@
 import Image from "next/image"; 
 import { fetchContent } from "../lib/contentful";
 import styles from "./src/styles/startsida.module.css";
+import "./src/styles/global.css";
 
 //"Home" renderar innehållet som hämtas från Contentful.
 export default function Home({ content }) {
