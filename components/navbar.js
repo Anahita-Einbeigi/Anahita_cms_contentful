@@ -3,7 +3,7 @@
 import Link from 'next/link';
 import { useEffect, useState, useRef } from 'react';
 import { getNavigationItems } from '../lib/navigation';
-import '../pages/src/styles/navigation.css';
+import styles from '../pages/src/styles/navbar.module.css';
 
 export default function Navigation() {
   const [navItems, setNavItems] = useState([]);
@@ -32,7 +32,6 @@ export default function Navigation() {
     }
   };
 
-  // Adds and removes event listeners dynamically when the menu is open or closed.
   useEffect(() => {
     if (isMenuOpen) {
       document.addEventListener('click', handleClickOutside);
@@ -41,16 +40,16 @@ export default function Navigation() {
     }
 
     return () => {
-      document.removeEventListener('click', handleClickOutside); 
+      document.removeEventListener('click', handleClickOutside);
     };
   }, [isMenuOpen]);
 
   return (
-    <nav className="navigation" ref={navRef}>
-      <button className="menu-icon" onClick={toggleMenu}>
+    <nav className={styles.navigation} ref={navRef}> {/* Använd styles objektet här */}
+      <button className={styles['menu-icon']} onClick={toggleMenu}>
         ☰
       </button>
-      <ul className={`menu ${isMenuOpen ? 'open' : ''}`}>
+      <ul className={`${styles.menu} ${isMenuOpen ? styles.open : ''}`}> {/* Använd styles objektet här */}
         {navItems.map((item) => (
           <li key={item.sys.id}>
             <Link href={item.fields?.slug || '/'} onClick={handleLinkClick}>

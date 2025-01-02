@@ -1,7 +1,6 @@
 import { fetchContent } from "../../lib/contentful";
 import styles from "../src/styles/projekt-single.module.css";
 import Image from "next/image";
-import "../src/styles/global.css";
 
 // ProjectSinglePage är en dynamisk sida som visar detaljer om ett specifikt projekt, inklusive rubrik, beskrivning, bilder och en länk till projektets externa sida om det finns tillgängligt.
 export default function ProjectSinglePage({ matchedProject }) {

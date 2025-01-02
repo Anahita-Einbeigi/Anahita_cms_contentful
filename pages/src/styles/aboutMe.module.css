@@ -1,12 +1,18 @@
-body {
+/* body {
   margin: 0;
   padding: 0;
   font-family: Arial, sans-serif;
   color: white;
   background-color: rgb(31, 31, 31);
-}
+} */
 
-.container {
+/* h2 {
+  font-size: 2rem;
+  font-weight: bold;
+} */
+
+
+.container.om-mig{
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -15,14 +21,14 @@ body {
   margin: 0 auto;
 }
 
-header {
+.om-mig header {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
   text-align: center;
 }
 
-h1 {
+.text1 {
   font-size: 3rem;
   font-weight: bold;
   color: white;
@@ -30,7 +36,7 @@ h1 {
   margin-bottom: 1rem;
 }
 
-h1::after {
+.text1::after {
   content: "";
   position: absolute;
   bottom: 0.02cm;
@@ -40,12 +46,7 @@ h1::after {
   background-color: white;
 }
 
-h2 {
-  font-size: 2rem;
-  font-weight: bold;
-}
-
-main {
+.om-mig-main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
@@ -60,20 +61,23 @@ main {
   flex-wrap: wrap;
 }
 
-.image-container {
+.imageContainer {
   margin-right: auto;
+  margin-left: auto;
   width: 30%;
 }
 
-.image-container img {
+.imageContainer img {
   max-width: 450px;
   height: 500px;
-  margin-top: 100px;
+  margin-top: 10px;
+  object-fit: cover;
 }
 
-.content-left {
+.contentLeft {
   width: 60%;
   margin-left: 0;
+  padding: 2rem;
 }
 
 .education,
@@ -98,13 +102,13 @@ main {
   font-size: 0.875rem;
 }
 
-ul {
+.om-mig-ul ul{
   padding-left: 1rem;
   list-style-type: disc;
   color: white;
 }
 
-ul li {
+.om-mig-ul ul li {
   margin-bottom: 1rem;
 }
 
@@ -114,10 +118,9 @@ ul li {
     align-items: center;
   }
 
-  .image-container,
-  .content-left {
-    width: 100%;
-    margin-top: 1rem;
+  .imageContainer,
+  .contentLeft {
+    width: 80%;
   }
 
   .education,

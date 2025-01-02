@@ -8,9 +8,9 @@ export default function NotFound({ content }) {
       {content.length > 0 ? (
         content.map((item) => (
           <div key={item.sys.id} className={styles.item}>
-            <p className={styles.description}>{item.fields.error}</p>
+            <p className={styles.description}>{item.fields.error|| "We couldn't find any error message."}</p>
             <a
-              href={item.fields.link}
+              href={item.fields.link|| "/"}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.link}

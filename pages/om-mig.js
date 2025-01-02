@@ -1,21 +1,20 @@
 import { fetchContent } from "../lib/contentful";
 import Image from "next/image";
 import Head from "next/head";
-import "./src/styles/aboutMe.css";
+import styles from './src/styles/aboutMe.module.css'; 
 
-// Huvudkomponenten "Home" renderar en personlig "About Me"-sida som visar utbildningar, arbetslivserfarenheter och en bild, med data hämtad från Contentful.
 export default function Home({ content }) {
   return (
-    <div className="container">
+    <div className={`${styles.container} ${styles.omMig}`}>
       <Head>
         <title>About Me</title>
         <meta name="description" content="Learn more about me, my education, and work experience." />
       </Head>
 
       {content.map((item) => (
-        <main key={item.sys.id} className="flex-container">
-          <div className="content-left">
-            <h1>About Me</h1>
+        <main key={item.sys.id} className={`${styles.flexContainer} ${styles.omMigMain}`}>
+          <div className={styles.contentLeft}>
+            <h1 className={styles.text1}>About Me</h1>
             <p className="text-base leading-relaxed">
               {item.fields.presentationstext}
             </p>
@@ -24,11 +23,11 @@ export default function Home({ content }) {
               {item.fields.utbildningar2 &&
                 Array.isArray(item.fields.utbildningar2) &&
                 item.fields.utbildningar2.length > 0 && (
-                  <div className="education">
+                  <div className={styles.education}>
                     <h2 className="text-xl font-bold mb-2">Education</h2>
-                    <ul className="list-disc pl-5 text-sm leading-relaxed space-y-4">
+                    <ul className="om-mig-ul list-disc pl-5 text-sm leading-relaxed space-y-4">
                       {item.fields.utbildningar2.map((utbildningar, index) => (
-                        <li key={index} className="mb-4">
+                        <li key={index} className="mb-4 om-mig-li">
                           <h3 className="font-semibold text-lg">
                             {utbildningar.fields.rubric}
                           </h3>
@@ -46,7 +45,7 @@ export default function Home({ content }) {
             </div>
           </div>
 
-          <div className="image-container">
+          <div className={styles.imageContainer}>
             {item.fields.image &&
               item.fields.image.fields &&
               item.fields.image.fields.file && (
@@ -64,7 +63,7 @@ export default function Home({ content }) {
           {item.fields.arbetslivserfarenhet &&
             Array.isArray(item.fields.arbetslivserfarenhet) &&
             item.fields.arbetslivserfarenhet.length > 0 && (
-              <div className="experience">
+              <div className={styles.experience}>
                 <h2 className="text-xl font-bold mb-2">Work Experience</h2>
                 <ul className="list-disc pl-5 text-sm leading-relaxed space-y-4">
                   {item.fields.arbetslivserfarenhet.map((experience, index) => (

@@ -1,25 +1,22 @@
-import { dirname } from "path";
-import { fileURLToPath } from "url";
+import pluginReact from 'eslint-plugin-react';
+import pluginNext from 'eslint-plugin-next';
 
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = dirname(__filename);
-
-export default {
-  extends: [
-    "eslint:recommended", 
-    "plugin:react/recommended", 
-    "plugin:@next/next/recommended", 
-  ],
-  parserOptions: {
-    ecmaVersion: 2020, 
-    sourceType: "module", 
-  },
-  settings: {
-    react: {
-      version: "detect", 
+export default [
+  {
+    files: ['**/*.{js,jsx,ts,tsx}'],
+    languageOptions: {
+      ecmaVersion: 'latest',
+      sourceType: 'module',
+      globals: {
+        react: 'readonly',
+      },
+    },
+    plugins: {
+      react: pluginReact,
+      next: pluginNext,
+    },
+    extends: ['plugin:react/recommended', 'plugin:next/recommended','next/core-web-vitals' ],
+    rules: {
     },
   },
-  rules: {
-    "no-unused-vars": "warn", 
-  },
-};
+];

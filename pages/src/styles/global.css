@@ -10,3 +10,27 @@ body, html{
     display: flex;
     flex-direction: column;
   }
+
+  h1 {
+    font-size: 3rem;
+    font-weight: bold;
+    color: white;
+    position: relative;
+    margin-bottom: 1rem;
+  }
+  
+  h1::after {
+    content: "";
+    position: absolute;
+    bottom: 0.02cm;
+    left: 40px;
+    width: 15%;
+    height: 1px;
+    background-color: white;
+  }
+
+  h2 {
+    font-size: 2rem;
+    font-weight: bold;
+  }
+  
