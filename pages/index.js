@@ -25,11 +25,9 @@ export default function Home({ content }) {
             <h1 className={styles.heading}>{item.fields.rubrik}</h1>
             <p className={styles.description}>{item.fields.presentationstext}</p>
             <div className={styles.buttonGroup}>
-              {item.fields.link && (
-                <a href={item.fields.link} target="_blank" rel="noopener noreferrer">
-                  Explore Now
-                </a>
-              )}
+              <a href="https://anahita-cms-projektarbete.vercel.app/projekt-index" target="_blank" rel="noopener noreferrer">
+                Explore Now
+              </a>
               {item.fields.linkedin && (
                 <a href={item.fields.linkedin} target="_blank" rel="noopener noreferrer">
                   Linkedin
